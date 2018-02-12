@@ -7,7 +7,8 @@ import { AppComponent } from './app.component';
 import { GithubService } from './services/github.service';
 import { UserListComponent } from './components/user-list.component';
 import { UserDetailComponent } from './components/user-detail.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {avatar, slide} from './animations/animations';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { UserDetailComponent } from './components/user-detail.component';
     BrowserModule,
     HttpModule,
     routing,
-    RouterModule
+    RouterModule,
+    BrowserAnimationsModule,
   ],
   providers: [GithubService, appRoutingProviders],
   bootstrap: [AppComponent]

@@ -1,5 +1,6 @@
 <div class="profile">
       <img routerLink="/"
+           @slide
            class="avatar-profile"
            [src]="user&&user.avatar_url?
         _DomSanitizer.bypassSecurityTrustUrl(user.avatar_url):
@@ -63,7 +64,7 @@
           <div>
             Followers
           </div>
-          <ul class="follower-list"
+          <ul class="follower-list" @slide
               *ngFor="let follower of followers; let i=index">
             <li class="follower-list-item"
                 [routerLink]="['/users', follower.login]"
@@ -85,7 +86,7 @@
           </div>
           <div class=""
               *ngFor="let repo of repos; let i=index">
-            <ul class="follower-list"
+            <ul @slide class="follower-list"
                 *ngIf="i<5">
 
               <li>name: {{repo.name}}</li>

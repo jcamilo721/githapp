@@ -2,8 +2,8 @@
   <img [src]="_DomSanitizer.bypassSecurityTrustUrl(avatarNotFound)" class="avatar" />
   <div>
     <h3>GitHub Users</h3>
-    <input (keyup)="searchForUserFromLocalData(search.value)" type="text" #search placeholder="Search Github Users">
-    <button (click)="searchForUserFromLocalData(search.value)">Search Users</button>
+    <input (keyup)="searchForUser(search.value)" type="text" #search placeholder="Search Github Users">
+    <button (click)="searchForUser(search.value)">Search Users</button>
   </div>
 </div>
 <div class="alert-message-box">
@@ -11,8 +11,11 @@
     {{alertMessage}}
   </div>
 </div>
-<ul class="user-list">
-  <li class="user-list-item" *ngFor="let user of users" [routerLink]="['/users', user.login]">
+<ul class="user-list" [@avatar]="users.length">
+  <li class="user-list-item"
+      *ngFor="let user of users"
+      [routerLink]="['/users', user.login]">
+
     <img [src]="user.avatar_url? _DomSanitizer.bypassSecurityTrustUrl(user.avatar_url): _DomSanitizer.bypassSecurityTrustUrl(avatarNotFound)" class="avatar" />
     <div class="avatar-label">
       {{ user.login }}

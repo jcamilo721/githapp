@@ -3,12 +3,15 @@ import {GithubService} from '../services/github.service';
 import {User} from '../models/user';
 import {GLOBAL} from '../services/global';
 import {DomSanitizer} from '@angular/platform-browser';
+import { avatar, slideInOutAnimation } from '../animations/animations';
 
 @Component({
   selector: 'user-list',
   templateUrl: '../views/user-list.html',
   styleUrls: ['../app.component.css'],
-  providers: [GithubService]
+  providers: [ GithubService ],
+  animations: [ avatar, slideInOutAnimation ],
+  host: { '[@slideInOutAnimation]': '' }
 })
 
 export class UserListComponent implements OnInit {
@@ -42,8 +45,8 @@ export class UserListComponent implements OnInit {
   getUsers () {
     this.users = [];
     this.usersFilteredByWord = [];
-    // this.githubService.getUsers().subscribe((data: any) => {
-    this.githubService.getUsersFromLocalData().subscribe((data: any) => {
+    this.githubService.getUsers().subscribe((data: any) => {
+    // this.githubService.getUsersFromLocalData().subscribe((data: any) => {
         console.log(data);
         data.map(u => {
           // this.users.push(new User(u.login, u.avatar_url, u.id, u.url));

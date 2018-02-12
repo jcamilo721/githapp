@@ -5,13 +5,15 @@ import {GithubService} from '../services/github.service';
 import {User} from '../models/user';
 import {GLOBAL} from '../services/global';
 import {DomSanitizer} from '@angular/platform-browser';
-import { DatePipe } from '@angular/common';
+import { slide, slideInOutAnimation } from '../animations/animations';
 
 @Component({
   selector: 'user-detail',
   templateUrl: '../views/user-detail.html',
   styleUrls: ['../app.component.css'],
-  providers: [GithubService]
+  providers: [ GithubService ],
+  animations: [ slide, slideInOutAnimation ],
+  host: { '[@slideInOutAnimation]': '' }
 })
 
 export class UserDetailComponent implements OnInit {
@@ -34,8 +36,8 @@ export class UserDetailComponent implements OnInit {
 
   ngOnInit() {
     console.log('Loading User Detail...');
-    // this.getUser();
-    this.getUserFromLocalData();
+    this.getUser();
+    // this.getUserFromLocalData();
   }
 
   getUser() {
