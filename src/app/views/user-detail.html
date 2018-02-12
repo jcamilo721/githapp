@@ -1,0 +1,100 @@
+<div class="profile">
+      <img routerLink="/"
+           class="avatar-profile"
+           [src]="user&&user.avatar_url?
+        _DomSanitizer.bypassSecurityTrustUrl(user.avatar_url):
+        _DomSanitizer.bypassSecurityTrustUrl(avatarNotFound)"
+
+      />
+      <div>
+        <h3 class="avatar-label-profile">{{user&&user.login? user.login:"The cat will take you home"}}</h3>
+      </div>
+    </div>
+    <div *ngIf="alertMessage" class="alert-message-box-profile">
+      <div class="alert-message">
+        <div class="profile-info">
+          {{alertMessage}}
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!alertMessage" class="box-profile">
+      <div class="alert-message">
+        <div class="profile-info">
+          {{user&&user.html_url? user.html_url: ''}}
+        </div>
+        <div class="profile-info">
+          {{user&&user.public_repos? 'Public Respos: ' + user.public_repos : ''}}
+        </div>
+        <div class="profile-info">
+          {{user&&user.followers?  'Followers: ' + user.followers: ''}}
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <section *ngIf="!user">
+        <span class="center-content">
+          <h1>No User information found. Click the cat to go home...</h1>
+        </span>
+      </section>
+      <section *ngIf="user">
+        <span class="center-content">
+          <h1>User Info</h1>
+        </span>
+        <div class="content-box complete-profile">
+          <div class="complete-profile-info" *ngIf="user&&user.name">{{'Name: ' +  user.name}}</div>
+          <div class="complete-profile-info" *ngIf="user&&user.bio">{{'Bio: ' +  user.bio}}</div>
+          <div class="complete-profile-info" *ngIf="user&&user.blog">{{'Blog: ' +  user.blog}}</div>
+          <div class="complete-profile-info" *ngIf="user&&user.company">{{ 'Company: ' + user.company}}</div>
+          <div class="complete-profile-info" *ngIf="user&&user.created_at">{{'Created at: ' +  user.created_at}}</div>
+          <div class="complete-profile-info" *ngIf="user&&user.email">{{'Email: ' +  user.email}}</div>
+          <div class="complete-profile-info" *ngIf="user&&user.followers">{{'Followers: ' +  user.followers}}</div>
+        </div>
+        <div class="content-box complete-profile" *ngIf="user">
+          <div class="complete-profile-info" *ngIf="user&&user.hireable">{{'Hireable: ' +  user.hireable}}</div>
+          <div class="complete-profile-info" *ngIf="user&&user.location">{{'Location: ' +  user.location}}</div>
+          <div class="complete-profile-info" *ngIf="user&&user.organizations_url">{{'Organization: ' +  user.organizations_url}}</div>
+          <div class="complete-profile-info" *ngIf="user&&user.public_gists">{{'Public Gists: ' +  user.public_gists}}</div>
+          <div class="complete-profile-info" *ngIf="user&&user.public_repos">{{'Public Repos: ' +  user.public_repos}}</div>
+          <div class="complete-profile-info" *ngIf="user&&user.type">{{'Type: ' +  user.type}}</div>
+          <div class="complete-profile-info" *ngIf="user&&user.updated_at">{{'Updated at: ' +  user.updated_at}}</div>
+        </div>
+        <article class="content-box" *ngIf="user&&user.followers">
+          <div>
+            Followers
+          </div>
+          <ul class="follower-list"
+              *ngFor="let follower of followers; let i=index">
+            <li class="follower-list-item"
+                [routerLink]="['/users', follower.login]"
+                *ngIf="i<10"
+            >
+              <img [src]="follower.avatar_url? _DomSanitizer.bypassSecurityTrustUrl(follower.avatar_url): _DomSanitizer.bypassSecurityTrustUrl(avatarNotFound)" class="avatar-follower" />
+              <div class="follower-avatar-label">
+                {{ follower.login }}
+              </div>
+            </li>
+          </ul>
+        </article>
+        <article class="content-box" *ngIf="user&&user.public_repos">
+          <div>
+            Repos
+          </div>
+          <div>
+            Public repos: {{user.public_repos}}
+          </div>
+          <div class=""
+              *ngFor="let repo of repos; let i=index">
+            <ul class="follower-list"
+                *ngIf="i<5">
+
+              <li>name: {{repo.name}}</li>
+              <li>forks count: {{repo.forks_count}}</li>
+              <li>watchers count: {{repo.watchers_count}}</li>
+              <li>stargazers count: {{repo.stargazers_count}}</li>
+
+            </ul>
+          </div>
+        </article>
+      </section>
+    </div>
