@@ -58,7 +58,7 @@ export class UserDetailComponent implements OnInit {
           error => {
             const alertMessage = <any>error;
             if (alertMessage != null) {
-              this.alertMessage = error.statusText;
+              this.alertMessage = error.statusText + ", waiting for GitHub data";
               console.log(this.alertMessage);
             }
           });
@@ -101,7 +101,7 @@ export class UserDetailComponent implements OnInit {
         error => {
           const alertMessage = <any>error;
           if (alertMessage != null) {
-            this.alertMessage += ' ' + error.statusText;
+            this.alertMessage += ' ' + error.statusText + ", waiting for GitHub data";
             console.log(this.alertMessage);
           }
         });
@@ -137,7 +137,7 @@ export class UserDetailComponent implements OnInit {
         error => {
           const alertMessage = <any>error;
           if (alertMessage != null) {
-            this.alertMessage += ' ' + error.statusText;
+            this.alertMessage += ' ' + error.statusText + ", waiting for GitHub data";
             console.log(this.alertMessage);
           }
         });

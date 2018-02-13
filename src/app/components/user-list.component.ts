@@ -56,7 +56,7 @@ export class UserListComponent implements OnInit {
       error => {
         const alertMessage = <any>error;
         if (alertMessage != null) {
-          this.alertMessage = error.message;
+          this.alertMessage = error.statusText + ", waiting for GitHub data";
         }
       });
     this.usersNotFiltered = this.users;
@@ -79,7 +79,7 @@ export class UserListComponent implements OnInit {
         error => {
           const alertMessage = <any>error;
           if (alertMessage != null) {
-            this.alertMessage = error.message;
+            this.alertMessage = error.statusText + ", waiting for GitHub data";
           }
         });
     }
